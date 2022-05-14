@@ -28,7 +28,7 @@ namespace HangmanConsole
                 int selectedCategoryIndex = GetUserSelectedCategory();
                 string hangmanWord = GetRandomWordFromSelectedCategory(selectedCategoryIndex);
                 PlayHangmanWithWord(hangmanWord);
-                Console.Write("Would you like to play again? Y/n: ");
+                Console.WriteLine("Would you like to play again? y/n: ");
                 string playAgain = Console.ReadKey().KeyChar.ToString();
 
                 if (playAgain.ToLower() == "y")
@@ -37,7 +37,44 @@ namespace HangmanConsole
                     Console.Clear();
 
                 }
-            } while (keepPlaying);
+                else if (playAgain.ToLower() == "n")
+                {
+                    keepPlaying = false;
+                    Console.Clear();
+                }
+                else 
+                {
+
+                }
+            }
+            while (keepPlaying);
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Playing Hangman! The following are a list of the available categories");
+
+                ShowCategoriesForSelection();
+                int selectedCategoryIndex = GetUserSelectedCategory(); // wordBank[selectedCategoryIndex]
+                string hangmanWord = GetRandomWordFromSelectedCategory(selectedCategoryIndex);
+                PlayHangmanWithWord(hangmanWord);
+                Console.WriteLine("Would you like to play again? y/n: ");
+                string playAgain = Console.ReadKey().KeyChar.ToString();
+
+                if (playAgain.ToLower() == "y")
+                {
+                    keepPlaying = true;
+                    Console.Clear();
+
+                } else if (playAgain.ToLower() == "n")
+                {
+                    keepPlaying = false;
+                    Console.Clear();
+                }
+                else 
+                {
+
+                }
+                // NEED TO FIX
+            }
             
         }
 
@@ -58,9 +95,10 @@ namespace HangmanConsole
 
             while (selectedValue < 0 || selectedValue > wordBank.Count - 1)
             {
-                Console.Write(Environment.NewLine + "Please choose a valid category by number: ");
+                Console.WriteLine(Environment.NewLine + "Please choose a valid category by number: ");
                 char selectedCategoryIndex = Console.ReadKey().KeyChar;
-                selectedValue = (int)Char.GetNumericValue(selectedCategoryIndex);
+                selectedValue = (int)Char.GetNumericValue(selectedCategoryIndex); // need to call this in PlayHangmanWithWord()
+                Console.WriteLine("");
             }
 
             return selectedValue;
@@ -86,6 +124,7 @@ namespace HangmanConsole
                     break;
                 }
                 
+                Console.WriteLine("Category: " + selectedWord); //Need to fix this line
                 Console.WriteLine(Environment.NewLine + maskedWord);
                 Console.WriteLine("Incorrect guesses: " + string.Join(", ", invalidEntries));
                 Console.WriteLine("Guesses left: " + (totalNumberOfGuesses - invalidEntries.Count));
@@ -106,9 +145,9 @@ namespace HangmanConsole
                     }
 
                     gameOver = (totalNumberOfGuesses - invalidEntries.Count) == 0;
-                    Console.Write(Environment.NewLine + "------------------------------------------------------------------------------");
+                    Console.WriteLine(Environment.NewLine + "------------------------------------------------------------------------------");
                 }
-               
+                
             }
 
             Console.WriteLine(Environment.NewLine + (guessedSuccessfully ? "Congratulations! You guessed the word!" : "Sorry. Better luck next time!"));

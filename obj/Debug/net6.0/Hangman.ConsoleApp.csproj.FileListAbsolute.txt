@@ -1,0 +1,15 @@
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.csproj.AssemblyReference.cache
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.AssemblyInfo.cs
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\bin\Debug\net6.0\Hangman.ConsoleApp.exe
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\bin\Debug\net6.0\Hangman.ConsoleApp.deps.json
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\bin\Debug\net6.0\Hangman.ConsoleApp.runtimeconfig.json
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\bin\Debug\net6.0\Hangman.ConsoleApp.dll
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\bin\Debug\net6.0\Hangman.ConsoleApp.pdb
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.dll
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\refint\Hangman.ConsoleApp.dll
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.pdb
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\Hangman.ConsoleApp.genruntimeconfig.cache
+C:\Users\17653\Documents\ELEVENFIFTYPROJECTS\codingFoundations\dotnetProjects\csharpBasics\Hangman.ConsoleApp\obj\Debug\net6.0\ref\Hangman.ConsoleApp.dll
