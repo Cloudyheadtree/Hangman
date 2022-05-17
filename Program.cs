@@ -11,18 +11,18 @@ namespace HangmanConsole
         static bool gameOver = false;
         static bool guessedSuccessfully = false;
         static bool keepPlaying = false;
-        static int totalNumberOfGuesses = 5;
+        static int totalNumberOfGuesses = 6; // After testing is done change this back from 3 to 6 lives. That is the standard for Hangman.
         static Dictionary<string, List<string>> wordBank = new Dictionary<string, List<string>> {
-            { "Food", new List<string>() { "Banana", "Cherry", "Grapes", "Cake" } },
-            { "Animals", new List<string>() { "Lions", "Tigers", "Bears", "Human" } },
-            { "Sports", new List<string>() { "Archery", "Skiing", "Boxing", "Swimming" } },
-            { "Colors", new List<string>() { "Perrywinkle", "Red", "Lilac", "Indigo" } },
+            { "Food", new List<string>() { "banana", "cherry", "grapes", "cake", "cereal", "mushrooms", "steak", "milk", "honey", "smoothie", "cookie", "brownie", "candy", "pie", "truffle", "water", "strawberry", "tapioca", "malt", "rice" } },
+            { "Animals", new List<string>() { "lion", "tiger", "bear", "human", "alligator", "pelican", "newt", "axlotl", "turkey", "shrew", "toad", "bull", "camel", "hippo", "elephant", "chicken", "beetle", "spider", "squid", "worm", "owl" } },
+            { "Sports", new List<string>() { "archery", "skiing", "boxing", "swimming", "rugby", "cricket", "fencing", "sailing", "mogul", "fishing", "gymnastics", "taekwondo", "polo", "pool", "darts", "golf", "running", "badminton", "tennis", "karate" } },
+            { "Colors", new List<string>() { "perrywinkle", "brown", "lilac", "indigo", "ruby", "goldenrod", "white", "black", "teal", "cyan", "magenta", "orange", "silver", "copper", "maroon", "green", "pink", "grey", "blue", "rose" } },
         };
         static void Main(string[] args)
         {
             do
             {
-                Console.WriteLine("Playing Hangman! The following are a list of the available categories");
+                Console.WriteLine("Hangman! Choose a category by number: ");
 
                 ShowCategoriesForSelection();
                 string selectedCategory = wordBank.Keys.ElementAt(GetUserSelectedCategory()) ;
@@ -32,7 +32,7 @@ namespace HangmanConsole
                 keepPlaying = false;
                 string playAgain = "";
                 do{
-                    Console.Write("Would you like to play again? y/n: ");
+                    Console.WriteLine("Would you like to play again? y/n: ");
                     playAgain = Console.ReadKey().KeyChar.ToString();
                     Console.WriteLine("");
                     if (playAgain.ToLower() == "y")
@@ -55,7 +55,7 @@ namespace HangmanConsole
             int keyIndex = 0;
             foreach (string key in wordBank.Keys)
             {
-                Console.WriteLine(keyIndex + ": " + key);
+                Console.WriteLine((keyIndex + 1) + ": " + key);
                 keyIndex++;
             }
         }
@@ -69,7 +69,7 @@ namespace HangmanConsole
             {
                 Console.WriteLine(Environment.NewLine + "Please choose a valid category by number: ");
                 char selectedCategoryIndex = Console.ReadKey().KeyChar;
-                selectedValue = (int)Char.GetNumericValue(selectedCategoryIndex); // need to call this in PlayHangmanWithWord()
+                selectedValue = (int)Char.GetNumericValue(selectedCategoryIndex) - 1; 
                 Console.WriteLine("");
             }
 
@@ -80,7 +80,7 @@ namespace HangmanConsole
         {
             Random rnd = new Random();
             int randNumber = rnd.Next(wordBank[selectedCategory].Count);
-            Console.WriteLine("This is the random number: " + randNumber);
+            // Console.WriteLine("This is the random number: " + randNumber); // used for testing purposes.
             string selectedWord = wordBank[selectedCategory].ElementAt(randNumber);
             
             return selectedWord;
@@ -92,21 +92,21 @@ namespace HangmanConsole
             List<string> validEntries = new List<string>();
             while (!gameOver)
             {
-                string maskedWord = GetMaskedWord(selectedWord, validEntries);
+                string maskedWord = GetMaskedWord(selectedWord, validEntries, invalidEntries); 
                 if (maskedWord.IndexOf("_") == -1)
                 {
                     guessedSuccessfully = true;
                     break;
                 }
                 
-                Console.WriteLine("Category: " + selectedCategory); //Need to fix this line
+                Console.WriteLine("Category: " + selectedCategory);
                 Console.WriteLine(Environment.NewLine + maskedWord);
                 Console.WriteLine("Incorrect guesses: " + string.Join(", ", invalidEntries));
                 Console.WriteLine("Guesses left: " + (totalNumberOfGuesses - invalidEntries.Count));
-                Console.Write("Would you like to guess another letter? ");
+                Console.WriteLine("Would you like to guess another letter? ");
 
                 string selectedCharacter = Console.ReadKey().KeyChar.ToString();
-                if (Regex.IsMatch(selectedCharacter, @"^[a-zA-Z]+$"))
+                if (Regex.IsMatch(selectedCharacter, @"^[a-zA-Z]+$")) // using a regex to specify which characters are valid and invalid
                 {
                     if (selectedWord.ToLower().IndexOf(selectedCharacter.ToLower()) != -1)
                     {
@@ -128,13 +128,16 @@ namespace HangmanConsole
             Console.WriteLine(Environment.NewLine + (guessedSuccessfully ? "Congratulations! You guessed the word!" : "Sorry. Better luck next time!"));
         }
 
-        private static string GetMaskedWord(string selectedWord, List<string> validCharacters)
+        private static string GetMaskedWord(string selectedWord, List<string> validCharacters, List<string> invalidCharacters) 
         {
             StringBuilder maskedString = new StringBuilder();
             string[] characterList = selectedWord.ToCharArray().Select(c => c.ToString()).ToArray();
             foreach (string character in characterList)
             {
-                maskedString.Append(validCharacters.FirstOrDefault(a => a.ToLower() == character.ToLower()) != null ? character : "_");
+                maskedString.Append(validCharacters.FirstOrDefault(a => a.ToLower() == character.ToLower()) != null ? character : "_"); 
+                
+
+
             }
             return maskedString.ToString();
         }
