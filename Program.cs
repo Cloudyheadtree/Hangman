@@ -10,8 +10,8 @@ namespace HangmanConsole
     {
         static bool gameOver = false;
         static bool guessedSuccessfully = false;
-        static int totalNumberOfGuesses = 5;
         static bool keepPlaying = false;
+        static int totalNumberOfGuesses = 5;
         static Dictionary<string, List<string>> wordBank = new Dictionary<string, List<string>> {
             { "Food", new List<string>() { "Banana", "Cherry", "Grapes", "Cake" } },
             { "Animals", new List<string>() { "Lions", "Tigers", "Bears", "Human" } },
@@ -25,56 +25,28 @@ namespace HangmanConsole
                 Console.WriteLine("Playing Hangman! The following are a list of the available categories");
 
                 ShowCategoriesForSelection();
-                int selectedCategoryIndex = GetUserSelectedCategory();
-                string hangmanWord = GetRandomWordFromSelectedCategory(selectedCategoryIndex);
-                PlayHangmanWithWord(hangmanWord);
-                Console.WriteLine("Would you like to play again? y/n: ");
-                string playAgain = Console.ReadKey().KeyChar.ToString();
+                string selectedCategory = wordBank.Keys.ElementAt(GetUserSelectedCategory()) ;
+                string hangmanWord = GetRandomWordFromSelectedCategory(selectedCategory);
+                PlayHangmanWithWord(hangmanWord, selectedCategory);
+                
+                keepPlaying = false;
+                string playAgain = "";
+                do{
+                    Console.Write("Would you like to play again? y/n: ");
+                    playAgain = Console.ReadKey().KeyChar.ToString();
+                    Console.WriteLine("");
+                    if (playAgain.ToLower() == "y")
+                    {
+                        keepPlaying = true;
+                        Console.Clear();
+                        gameOver = false;
+                        guessedSuccessfully = false;
+                    }
+                } while(playAgain.ToLower() != "n" && playAgain.ToLower() != "y");
 
-                if (playAgain.ToLower() == "y")
-                {
-                    keepPlaying = true;
-                    Console.Clear();
 
-                }
-                else if (playAgain.ToLower() == "n")
-                {
-                    keepPlaying = false;
-                    Console.Clear();
-                }
-                else 
-                {
-
-                }
-            }
-            while (keepPlaying);
-            {
-                Console.WriteLine("");
-                Console.WriteLine("Playing Hangman! The following are a list of the available categories");
-
-                ShowCategoriesForSelection();
-                int selectedCategoryIndex = GetUserSelectedCategory(); // wordBank[selectedCategoryIndex]
-                string hangmanWord = GetRandomWordFromSelectedCategory(selectedCategoryIndex);
-                PlayHangmanWithWord(hangmanWord);
-                Console.WriteLine("Would you like to play again? y/n: ");
-                string playAgain = Console.ReadKey().KeyChar.ToString();
-
-                if (playAgain.ToLower() == "y")
-                {
-                    keepPlaying = true;
-                    Console.Clear();
-
-                } else if (playAgain.ToLower() == "n")
-                {
-                    keepPlaying = false;
-                    Console.Clear();
-                }
-                else 
-                {
-
-                }
-                // NEED TO FIX
-            }
+            } while (keepPlaying);
+            
             
         }
 
@@ -104,14 +76,17 @@ namespace HangmanConsole
             return selectedValue;
         } 
 
-        private static string GetRandomWordFromSelectedCategory(int selectedIndex)
+        private static string GetRandomWordFromSelectedCategory(string selectedCategory)
         {
             Random rnd = new Random();
-            string selectedWord = wordBank[wordBank.Keys.ElementAt(selectedIndex)].ElementAt(rnd.Next(wordBank.Count - 1));
+            int randNumber = rnd.Next(wordBank[selectedCategory].Count);
+            Console.WriteLine("This is the random number: " + randNumber);
+            string selectedWord = wordBank[selectedCategory].ElementAt(randNumber);
+            
             return selectedWord;
         }
 
-        private static void PlayHangmanWithWord(string selectedWord)
+        private static void PlayHangmanWithWord(string selectedWord, string selectedCategory)
         {
             List<string> invalidEntries = new List<string>();
             List<string> validEntries = new List<string>();
@@ -124,7 +99,7 @@ namespace HangmanConsole
                     break;
                 }
                 
-                Console.WriteLine("Category: " + selectedWord); //Need to fix this line
+                Console.WriteLine("Category: " + selectedCategory); //Need to fix this line
                 Console.WriteLine(Environment.NewLine + maskedWord);
                 Console.WriteLine("Incorrect guesses: " + string.Join(", ", invalidEntries));
                 Console.WriteLine("Guesses left: " + (totalNumberOfGuesses - invalidEntries.Count));
